@@ -42,7 +42,6 @@ STDOUT_FILE=$LOGS_DIR/stdout.log
 
 LIB_DIR=$DEPLOY_DIR/lib
 LIB_JARS=`ls $LIB_DIR | grep .jar | awk '{print "'$LIB_DIR'/"$0}' | tr "\n" ":"`
-echo "LIB_JARS：${LIB_JARS}"
 
 JAVA_OPTS=" -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true "
 JAVA_DEBUG_OPTS=""
