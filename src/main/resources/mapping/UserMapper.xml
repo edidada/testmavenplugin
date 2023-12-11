@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wdidada.test.mybatisspringbootstarter.mapper.UserMapper">
+
+    <sql id="Base_Column_List" >
+        id, userName, passWord, realName
+    </sql>
+
+    <resultMap id="BaseResultMap" type="cn.wdidada.test.mybatisspringbootstarter.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="userName" jdbcType="VARCHAR" property="userName" />
+        <result column="passWord" jdbcType="VARCHAR" property="passWord" />
+        <result column="realName" jdbcType="VARCHAR" property="realName" />
+    </resultMap>
+
+    <!-- 插入数据:返回记录主键id值 -->
+    <insert id="insertOneTest" parameterType="cn.wdidada.test.mybatisspringbootstarter.entity.User" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+        insert into user (userName, passWord, realName)
+        values (#{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="getUser" resultType="cn.wdidada.test.mybatisspringbootstarter.entity.User">
+        select id,userName,passWord,realName from user where id = #{id}
+    </select>
+
+    <select id="getUserByName" resultType="cn.wdidada.test.mybatisspringbootstarter.entity.User">
+        select id,userName,passWord,realName from user where userName like CONCAT('%',CONCAT(#{name},'%'))
+    </select>
+
+    <select id="getUserByNames" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        from user
+        WHERE userName IN
+        <foreach collection="list" item="name" index="index" open="(" close=")" separator=",">
+            #{name}
+        </foreach>
+    </select>
+
+    <select id="getOneUserByName" resultType="cn.wdidada.test.mybatisspringbootstarter.entity.User">
+        select id,userName,passWord,realName from user where userName like CONCAT('%',CONCAT(#{name},'%'))
+    </select>
+    <select id="selectByIdSet" resultType="cn.wdidada.test.mybatisspringbootstarter.entity.User">
+        SELECT
+        <include refid="Base_Column_List" />
+        from user
+        WHERE  userName=#{name,jdbcType=VARCHAR} and id IN
+        <foreach collection="idList" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+    <select id="selectByIdMap" resultType="cn.wdidada.test.mybatisspringbootstarter.entity.User">
+        select
+        <include refid="Base_Column_List" />
+        from user where
+        userName = #{name}
+        and ID in
+        <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <insert id="insertOne" parameterType="cn.wdidada.test.mybatisspringbootstarter.entity.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into user (userName, passWord,
+                          realName)
+        values (#{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR},
+        #{realName,jdbcType=VARCHAR})
+    </insert>
+
+    <!--<insert id="insertSelective" parameterType="User">
+        insert into User
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="username != null">
+                userName,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findAllUser" resultType="User">
+        select * from User
+    </select>-->
+</mapper>

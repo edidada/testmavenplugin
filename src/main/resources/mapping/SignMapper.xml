@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wdidada.test.mybatisspringbootstarter.mapper.SignMapper">
+    <insert id="insertOne" parameterType="cn.wdidada.test.mybatisspringbootstarter.entity.Sign" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">select replace(uuid(), '-', '')
+        </selectKey>
+        insert into t_sign (id, date, userId, weekday)
+        values (#{id},#{date}, #{userId}, #{weekday})
+    </insert>
+
+    <select id="isSign7InWeek" parameterType="string" resultType="int">
+        select count(*) from t_sign where weekday = #{date}
+    </select>
+
+    <select id="isSign7InWeekWithId" parameterType="string" resultType="int">
+        select count(*) from t_sign where 1=1
+        <if test="date != null">
+            and weekday = #{date}
+        </if>
+        <if test="userId != userId">
+            and userId = #{userId}
+        </if>
+    </select>
+
+</mapper>
