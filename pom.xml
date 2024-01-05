@@ -162,5 +162,18 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
+        <profile>
+            <id>Windows</id>
+            <properties>
+                <osname>Windows</osname>
+            </properties>
+            <activation>
+                <os>
+                    <name>Windows 10</name>
+                    <arch>amd64</arch>
+                    <version>10.0</version>
+                </os>
+            </activation>
+        </profile>
     </profiles>
 </project>
