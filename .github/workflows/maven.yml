@@ -27,6 +27,10 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
         cache: maven
+    - name: xmake
+      run: |
+        curl -fsSL https://xmake.io/shget.text | bash
+        source ~/.xmake/profile
     - name: maven profile
       run: ｜
         mvn help:evaluate -Dexpression=os.arch
