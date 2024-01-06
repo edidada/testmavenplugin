@@ -165,6 +165,7 @@
         <profile>
             <id>Windows</id>
             <properties>
+                <profile.active>win</profile.active>
                 <osname>Windows</osname>
             </properties>
             <activation>
@@ -172,6 +173,19 @@
                     <name>Windows 10</name>
                     <arch>amd64</arch>
                     <version>10.0</version>
+                </os>
+            </activation>
+        </profile>
+        <profile>
+            <id>Mac</id>
+            <properties>
+                <profile.active>mac</profile.active>
+                <osname>mac x</osname>
+            </properties>
+            <activation>
+                <os>
+                    <name>Mac OS X</name>
+                    <arch>x86_64</arch>
                 </os>
             </activation>
         </profile>
