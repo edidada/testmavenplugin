@@ -31,11 +31,12 @@ jobs:
       run: |
         curl -fsSL https://xmake.io/shget.text | bash
         source ~/.xmake/profile
-    - name: maven profile
-      run: ｜
-        mvn help:evaluate -Dexpression=os.arch
-        mvn help:evaluate -Dexpression=os.name
-        mvn help:evaluate -Dexpression=os.version
+    - name: maven profile arch
+      run: mvn help:evaluate -Dexpression=os.arch
+    - name: maven profile name
+      run: mvn help:evaluate -Dexpression=os.name
+    - name: maven profile arch
+      run: mvn help:evaluate -Dexpression=os.version
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
